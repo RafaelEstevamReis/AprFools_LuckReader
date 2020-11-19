@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Check your luck</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
 
@@ -53,7 +54,82 @@ function  showResult(){
         }
     }
     //$("#resultContainer").children
-
+    showChart();
+}
+function showChart(){  
+   var colors = {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(201, 203, 207)'
+    };
+    var data = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            backgroundColor: colors.red,
+            borderColor: colors.red,
+            data: [7],
+            label: 'D0'
+        }, {
+            backgroundColor: colors.orange,
+            borderColor: colors.orange,
+            data: [9],
+            hidden: true,
+            label: 'D1',
+            fill: '-1'
+        }, {
+            backgroundColor: colors.yellow,
+            borderColor: colors.yellow,
+            data: [16],
+            label: 'D2',
+            fill: 1
+        }, {
+            backgroundColor: colors.green,
+            borderColor: colors.green,
+            data: [6],
+            label: 'D3',
+            fill: false
+        }, {
+            backgroundColor: colors.blue,
+            borderColor: colors.blue,
+            data: [4],
+            label: 'D4',
+            fill: '-1'
+        }, {
+            backgroundColor: colors.purple,
+            borderColor: colors.purple,
+            data: [11],
+            label: 'D5',
+            fill: '-1'
+        }]
+    };
+    
+    var options = {
+        maintainAspectRatio: true,
+        spanGaps: false,
+        elements: {
+            line: {
+                tension: 0.000001
+            }
+        },
+        plugins: {
+            filler: {
+                propagate: false
+            },
+            'samples-filler-analyser': {
+                target: 'chart-analyser'
+            }
+        }
+    };
+    
+    var chart = new Chart('chart-0', {
+        type: 'radar',
+        data: data,
+        options: options
+    });
 }
         </script>
         <style>
@@ -153,6 +229,8 @@ function  showResult(){
             </div>
             <div id="testResult">
                 Resultado
+
+                <canvas id="chart-0" width="400" height="400"></canvas>
 
                 <div id="resultContainer"> </div>
 
