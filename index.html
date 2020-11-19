@@ -1,8 +1,81 @@
 <html>
     <head>
         <title>Check your luck</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+
+
+
+function startTest(){
+    $("#home").hide();
+
+    $("#test").show();
+    show1();
+}
+function hideAll(){
+    $("#testPart1").hide();
+    $("#testPart2").hide();
+    $("#testPart3").hide();
+    $("#testPart4").hide();
+    $("#testResult").hide(); 
+}
+function  show1(){
+    hideAll();
+    $("#testPart1").show();
+}
+function  show2(){
+    hideAll();
+    $("#testPart2").show();
+}
+function  show3(){
+    hideAll();
+    $("#testPart3").show();
+}
+function  show4(){
+    hideAll();
+    $("#testPart4").show();
+}
+function  showResult(){
+    hideAll();
+    $("#testResult").show();
+}
+        </script>
+        <style>
+            #test{
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        Test - Test - Test - Test - Test - Test
+        <div id="home">
+            Test - Test - Test - Test - Test - Test
+            <br />
+            <br />
+            <br />
+            <button onclick="startTest();">Iniciar Teste</button>
+        </div>
+        <div id="test">
+            Test stuff
+            <div id="testPart1">
+                Teste 1
+               
+            <button onclick="show2();">Avançar Teste</button>
+            </div>
+            <div id="testPart2">
+                Teste 2
+                <button onclick="show3();">Avançar Teste</button>
+            </div>
+            <div id="testPart3">
+                Teste 3
+                <button onclick="show4();">Avançar Teste</button>
+            </div>
+            <div id="testPart4">
+                Teste 4
+                <button onclick="showResult();">Finalizar Teste</button>
+            </div>
+            <div id="testResult">
+                Resultado
+            </div>
+        </div>
     </body>
 </html>
