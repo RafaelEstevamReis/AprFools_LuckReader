@@ -5,7 +5,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
 
-
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 function startTest(){
     $("#home").hide();
@@ -40,12 +44,15 @@ function  showResult(){
     hideAll();
     $("#testResult").show();
 
+    var values = [0,0,0,0,0];
+
     document.getElementById("resultContainer").innerHTML="";
     for (testPage = 1; testPage <= 4; testPage++) {
-        for (question = 1; question <= 4; question++) {
+        for (question = 1; question <= 5; question++) {
             qId = "t"+testPage+"_p"+question;
 
             val = document.getElementById(qId).value ;
+            values[question-1] += parseInt(val);
 
             var node = document.createElement("p");
             node.innerHTML = qId+": result: "+val;
@@ -53,10 +60,9 @@ function  showResult(){
             document.getElementById("resultContainer").appendChild(node);
         }
     }
-    //$("#resultContainer").children
-    showChart();
+    showChart(values);
 }
-function showChart(){  
+function showChart(values){  
    var colors = {
         red: 'rgb(255, 99, 132)',
         orange: 'rgb(255, 159, 64)',
@@ -66,63 +72,29 @@ function showChart(){
         purple: 'rgb(153, 102, 255)',
         grey: 'rgb(201, 203, 207)'
     };
+
+    var colorsArr = [colors.red, colors.orange, colors.yellow, colors.green, colors.blue, colors.purple, colors.grey  ];
+    var color = colorsArr[getRandomInt(0,colorsArr.length)];
+    var colorA = Color(color).alpha(0.5).rgbString();
+
     var data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['D1', 'D2', 'D3', 'D4', 'D5'],
         datasets: [{
-            backgroundColor: colors.red,
-            borderColor: colors.red,
-            data: [7],
-            label: 'D0'
-        }, {
-            backgroundColor: colors.orange,
-            borderColor: colors.orange,
-            data: [9],
-            hidden: true,
-            label: 'D1',
-            fill: '-1'
-        }, {
-            backgroundColor: colors.yellow,
-            borderColor: colors.yellow,
-            data: [16],
-            label: 'D2',
-            fill: 1
-        }, {
-            backgroundColor: colors.green,
-            borderColor: colors.green,
-            data: [6],
-            label: 'D3',
-            fill: false
-        }, {
-            backgroundColor: colors.blue,
-            borderColor: colors.blue,
-            data: [4],
-            label: 'D4',
-            fill: '-1'
-        }, {
-            backgroundColor: colors.purple,
-            borderColor: colors.purple,
-            data: [11],
-            label: 'D5',
-            fill: '-1'
-        }]
+            backgroundColor: colorA,
+            borderColor: color,
+            data: values,
+            label: 'Data'
+        },{
+            backgroundColor: 'rgb(255,255,255)',
+            borderColor: 'rgb(255,255,255)',
+            data: [0,0,0,0,0],
+            label: '-'
+        },]
     };
     
     var options = {
         maintainAspectRatio: true,
-        spanGaps: false,
-        elements: {
-            line: {
-                tension: 0.000001
-            }
-        },
-        plugins: {
-            filler: {
-                propagate: false
-            },
-            'samples-filler-analyser': {
-                target: 'chart-analyser'
-            }
-        }
+        spanGaps: true
     };
     
     var chart = new Chart('chart-0', {
@@ -163,6 +135,9 @@ function showChart(){
                 <p>Quão provável é você cair neste migué?</p>
                 <input type="range" min="1" max="5" value="3" id="t1_p4">
                 
+                <p>Pergunta 5:</p>
+                <input type="range" min="1" max="5" value="3" id="t1_p5">
+               
                 <br />
                 <br />
                 <button onclick="show2();">Avançar Teste</button>
@@ -181,6 +156,9 @@ function showChart(){
 
                 <p>Pergunta 4:</p>
                 <input type="range" min="1" max="5" value="3" id="t2_p4">
+               
+                <p>Pergunta 5:</p>
+                <input type="range" min="1" max="5" value="3" id="t2_p5">
                
                 <br />
                 <br />
@@ -202,6 +180,9 @@ function showChart(){
                 <p>Pergunta 4:</p>
                 <input type="range" min="1" max="5" value="3" id="t3_p4">
                
+                <p>Pergunta 5:</p>
+                <input type="range" min="1" max="5" value="3" id="t3_p5">
+               
                 <br />
                 <br />
                 <button onclick="show2();">Recuar Teste</button>
@@ -222,6 +203,9 @@ function showChart(){
                 <p>Pergunta 4:</p>
                 <input type="range" min="1" max="5" value="3" id="t4_p4">
                
+                <p>Pergunta 5:</p>
+                <input type="range" min="1" max="5" value="3" id="t4_p5">
+               
                 <br />
                 <br />
                 <button onclick="show3();">Recuar Teste</button>
@@ -230,7 +214,7 @@ function showChart(){
             <div id="testResult">
                 Resultado
 
-                <canvas id="chart-0" width="400" height="400"></canvas>
+                <canvas id="chart-0" width="150" height="150"></canvas>
 
                 <div id="resultContainer"> </div>
 
