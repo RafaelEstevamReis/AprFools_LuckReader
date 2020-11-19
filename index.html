@@ -84,15 +84,13 @@ function showChart(values){
             borderColor: color,
             data: values,
             label: 'Data'
-        },{
-            backgroundColor: 'rgb(255,255,255)',
-            borderColor: 'rgb(255,255,255)',
-            data: [0,0,0,0,0],
-            label: '-'
-        },]
+        }]
     };
     
     var options = {
+        scale: {
+            ticks: { min: 0 },
+        },
         maintainAspectRatio: true,
         spanGaps: true
     };
