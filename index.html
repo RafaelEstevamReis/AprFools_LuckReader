@@ -38,6 +38,22 @@ function  show4(){
 function  showResult(){
     hideAll();
     $("#testResult").show();
+
+    document.getElementById("resultContainer").innerHTML="";
+    for (testPage = 1; testPage <= 4; testPage++) {
+        for (question = 1; question <= 4; question++) {
+            qId = "t"+testPage+"_p"+question;
+
+            val = document.getElementById(qId).value ;
+
+            var node = document.createElement("p");
+            node.innerHTML = qId+": result: "+val;
+            
+            document.getElementById("resultContainer").appendChild(node);
+        }
+    }
+    //$("#resultContainer").children
+
 }
         </script>
         <style>
@@ -58,23 +74,80 @@ function  showResult(){
             Test stuff
             <div id="testPart1">
                 Teste 1
+
+                <p>Pergunta 1:</p>
+                <input type="range" min="1" max="5" value="3" id="t1_p1">
+
+                <p>Pergunta 2:</p>
+                <input type="range" min="1" max="5" value="3" id="t1_p2">
+
+                <p>Pergunta 3:</p>
+                <input type="range" min="1" max="5" value="3" id="t1_p3">
+
+                <p>Pergunta 4:</p>
+                <input type="range" min="1" max="5" value="3" id="t1_p4">
                
-            <button onclick="show2();">Avançar Teste</button>
+                <button onclick="show2();">Avançar Teste</button>
             </div>
             <div id="testPart2">
                 Teste 2
+
+                <p>Pergunta 1:</p>
+                <input type="range" min="1" max="5" value="3" id="t2_p1">
+
+                <p>Pergunta 2:</p>
+                <input type="range" min="1" max="5" value="3" id="t2_p2">
+
+                <p>Pergunta 3:</p>
+                <input type="range" min="1" max="5" value="3" id="t2_p3">
+
+                <p>Pergunta 4:</p>
+                <input type="range" min="1" max="5" value="3" id="t2_p4">
+               
+                <button onclick="show1();">Recuar Teste</button>
                 <button onclick="show3();">Avançar Teste</button>
             </div>
             <div id="testPart3">
                 Teste 3
+
+                <p>Pergunta 1:</p>
+                <input type="range" min="1" max="5" value="3" id="t3_p1">
+
+                <p>Pergunta 2:</p>
+                <input type="range" min="1" max="5" value="3" id="t3_p2">
+
+                <p>Pergunta 3:</p>
+                <input type="range" min="1" max="5" value="3" id="t3_p3">
+
+                <p>Pergunta 4:</p>
+                <input type="range" min="1" max="5" value="3" id="t3_p4">
+               
+                <button onclick="show2();">Recuar Teste</button>
                 <button onclick="show4();">Avançar Teste</button>
             </div>
             <div id="testPart4">
                 Teste 4
+
+                <p>Pergunta 1:</p>
+                <input type="range" min="1" max="5" value="3" id="t4_p1">
+
+                <p>Pergunta 2:</p>
+                <input type="range" min="1" max="5" value="3" id="t4_p2">
+
+                <p>Pergunta 3:</p>
+                <input type="range" min="1" max="5" value="3" id="t4_p3">
+
+                <p>Pergunta 4:</p>
+                <input type="range" min="1" max="5" value="3" id="t4_p4">
+               
+                <button onclick="show3();">Recuar Teste</button>
                 <button onclick="showResult();">Finalizar Teste</button>
             </div>
             <div id="testResult">
                 Resultado
+
+                <div id="resultContainer"> </div>
+
             </div>
         </div>
     </body>
